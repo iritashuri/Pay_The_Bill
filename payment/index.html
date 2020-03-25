@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Pay the bill</title>
+</head>
+
+<body>
+    <div id="app-container">
+        <div id="pay-the-bill">
+            <h1>Pay the bill</h1>
+        </div>
+        <div id="log-in">
+            <li>Member Login</li>
+            <li><input id="input" type="text" name="User Name" placeholder="User Name"></li>
+            <li><input id="input" type="password" name="Password" placeholder="......."></li>
+            <button class="btn" onclick="register()"> Login </button>
+            <li id="forget-password">Forget Password?</li>
+
+        </div>
+    </div>
+    <script>
+        async function register() {
+            const origin = window.origin
+            fetch('http://localhost:3001/register-and-broadcast-node', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    "newNodeUrl": origin
+                })
+            }).then(respone => {
+                window.location.replace(origin + '/connected');
+            })
+        }
+    </script>
+    <style type="text/css">
+        h1 {
+            font-size: 60px;
+            font-family: sans-serif;
+            color: #1f4a08;
+        }
+
+        body {
+            background-color: rgb(60, 210, 255);
+        }
+
+        .btn {
+            width: 100px;
+            height: 60px;
+            font-size: 25px;
+            border-radius: 13px;
+            color: #af5d5d;
+            margin-top: 50px;
+            background-color: floralwhite;
+            position: center;
+        }
+
+        #app-container {
+            text-align: center;
+        }
+
+        /*#pay-the-bill {}*/
+
+        #log-in {
+            color: cadetblue;
+            font-family: sans-serif;
+            font-size: xx-large;
+            border-style: none;
+            background-color: aquamarine;
+            /*padding: 30px;*/
+            width: 10%;
+            margin: auto;
+            margin-top: 0px;
+            margin-bottom: 100px;
+            padding: 100px;
+            padding-top: 50px;
+            padding-right: 150px;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, .3);
+            /*border-color: transparent;*/
+            border-radius: 5px;
+            list-style-type: none;
+            text-align: center;
+        }
+
+        #forget-password {
+            font-size: medium;
+            padding: 10px;
+        }
+
+        #input {
+            width: 200px;
+        }
+    </style>
+</body>
+
+</html>

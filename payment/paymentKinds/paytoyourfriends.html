@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Pay to your friend</title>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Pay to your friend</h1>
+        <div id="main" class="col-md-6 offset-md-3">
+            <form ng-submit="search(searchValue)">
+                <p>Please enter amount and recipiend Adress</p>
+                <form action="/action_page.php">
+                    <label for="quantity">Amount of IPay coins</label>
+                    <input id="amount" type="number" name="quantity" step="0.01">
+                </form>
+                <form ng-submit="search(searchValue)">
+                    <form action="/action_page.php">
+                        <label for="quantity">Adress: </label>
+                        <input id="address" type="text" name="quantity">
+                    </form>
+                    <input id="payb" type="submit" value="Pay" onclick="pay()">
+                </form>
+        </div>
+        <div>
+            <button id="backbtn" class="btn" onclick="backToMain()"> Back to main page</button>
+            <button id="backbtn" class="btn" onclick="backToPayment()"> Back to payment page</button>
+        </div>
+
+        <script>
+            async function backToMain() {
+                window.location.replace(origin + '/connected');
+            }
+            async function backToPayment() {
+                window.location.replace(origin + '/payTheBill');
+            }
+            //const  = document.getElementById("address").value;
+            async function pay() {
+                const origin = window.origin;
+                const amount = parseFloat(document.getElementById("amount").value);
+                const recipient = document.getElementById("address").value;
+                fetch(origin + '/transaction/broadcast', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        "amount": amount,
+                        "recipient": recipient
+                    })
+                }).then(res => res.json()).then(res => {
+                    if (res.success) window.location.replace(origin + '/paiedsuccessfully');
+                    else window.location.replace(origin + '/notpaied');
+                })
+            }
+        </script>
+
+
+        <style type="text/css">
+            #address {
+                width: 60%;
+            }
+
+            body {
+                background-color: rgb(60, 210, 255);
+            }
+
+            #app-container {
+                text-align: center;
+            }
+
+            h1 {
+                font-size: 60px;
+                font-family: sans-serif;
+                text-align: center;
+            }
+
+            #main {
+                color: cadetblue;
+                font-family: sans-serif;
+                font-size: large;
+                border-style: none;
+                background-color: aquamarine;
+                background-position: left;
+                /* padding: 30px; */
+                width: 50%;
+                margin: auto;
+                margin-top: 0px;
+                margin-bottom: 100px;
+                padding: 100px;
+                padding-top: 50px;
+                padding-right: 150px;
+                box-shadow: 5px 5px 15px rgba(0, 0, 0, .3);
+                /* border-color: transparent; */
+                border-radius: 5px;
+                list-style-type: none;
+                text-align: center;
+                color: black;
+                /*background-clip: padding-box;*/
+            }
+
+            #payb {
+                width: 50px;
+                height: 30px;
+                border-radius: 13px;
+                color: #af5d5d;
+                margin-top: 50px;
+                display: table-row;
+                padding: 30;
+                font-size: 20px;
+                text-align: center;
+                vertical-align: middle;
+                font-size: 17px;
+
+            }
+
+            .btn {
+                width: 150px;
+                height: 60px;
+                font-size: 25px;
+                border-radius: 13px;
+                color: #af5d5d;
+                margin-top: 50px;
+                display: table-row;
+                padding: 30;
+                font-size: 20px;
+                text-align: center;
+                vertical-align: middle;
+            }
+
+            #backbtn {
+                width: 90px;
+                height: 40px;
+                border-radius: 13px;
+                color: #af5d5d;
+                margin-top: 50px;
+                display: table-row;
+                padding: 30;
+                font-size: 10px;
+                text-align: center;
+                vertical-align: middle;
+            }
+        </style>
+
+
+</body>
+
+</html>

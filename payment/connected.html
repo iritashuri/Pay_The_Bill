@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Pay the bill</title>
+</head>
+
+<body>
+    <div id="app-container">
+        <h1>Welcome!</h1>
+        <div id="address">
+            <p>Account address:</p>
+            <p name="p"></p>
+        </div>
+        <div id="main">
+
+            <button class="btn" onclick="pay()"> Pay </button>
+            <button class="btn" onclick="getInformation()"> Get information </button>
+            <button class="btn" onclick="buyCoins()"> Buy coins </button>
+            <button class="btn" onclick="mine()"> Mine </button>
+            <button class="btn" onclick="myBills()"> my bills </button>
+            <button class="btn" onclick="creatBill()"> create bill </button>
+        </div>
+    </div>
+    <script>
+        document.getElementsByName("p")[0].innerHTML = "<%=nodeAddress%>";
+
+
+        async function pay() {
+            window.location.replace(origin + '/payTheBill');
+
+        }
+        async function getInformation() {
+            window.location.replace(origin + '/block-explorer');
+
+        }
+        async function buyCoins() {
+            window.location.replace(origin + '/buycoins');
+        }
+        async function mine() {
+            const origin = window.origin
+            fetch(origin + '/mine').then(respone => {
+                window.location.replace(origin + '/mined');
+            })
+        }
+        async function myBills() {
+            window.location.replace(origin + '/myBills');
+
+        }
+        async function creatBill() {
+            window.location.replace(origin + '/create-bill');
+        }
+    </script>
+
+    <style type="text/css">
+        h1 {
+            font-size: 60px;
+            font-family: sans-serif;
+        }
+
+        body {
+            background-color: rgb(60, 210, 255);
+        }
+
+        #main {
+            color: cadetblue;
+            font-family: sans-serif;
+            font-size: large;
+            border-style: none;
+            background-color: aquamarine;
+            background-position: left;
+            /* padding: 30px; */
+            width: 50%;
+            margin: auto;
+            margin-top: 0px;
+            margin-bottom: 100px;
+            padding: 100px;
+            padding-top: 50px;
+            padding-right: 150px;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, .3);
+            /* border-color: transparent; */
+            border-radius: 5px;
+            list-style-type: none;
+            text-align: center;
+            /*background-clip: padding-box;*/
+        }
+
+        .btn {
+            width: 150px;
+            height: 60px;
+            font-size: 25px;
+            border-radius: 13px;
+            color: #af5d5d;
+            margin-top: 50px;
+            display: table-row;
+            padding: 30;
+            font-size: 20px;
+            text-align: center;
+            vertical-align: middle;
+
+        }
+
+        #app-container {
+            text-align: center;
+        }
+
+        #address {
+            border-width: 1px;
+            border-style: solid;
+            border-radius: 10px;
+            width: fit-content;
+            /* vertical-align: sub; */
+            text-align: center;
+            display: block;
+            align-items: center;
+            margin: auto;
+        }
+    </style>
+</body>
+
+</html>
