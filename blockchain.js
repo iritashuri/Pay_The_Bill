@@ -3,6 +3,7 @@ const currentNodeUrl = process.argv[3];
 const currentNodPort = process.argv[2];
 const uuid = require('uuid/v1');
 
+
 function Blockchain() {
     this.chain = [];
     this.pendingTransactions = [];
